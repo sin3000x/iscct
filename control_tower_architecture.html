@@ -1,0 +1,113 @@
+
+<style>
+.ct{font-family:var(--font-sans);padding:1rem 0 0.5rem}
+.lbl{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;padding-left:2px}
+.row{display:flex;gap:6px;margin-bottom:0}
+.chip{border-radius:8px;padding:7px 10px;flex:1;min-width:0;border-width:0.5px;border-style:solid}
+.ctitle{font-size:12px;font-weight:500;margin-bottom:1px}
+.csub{font-size:10px;font-weight:400;opacity:.72;line-height:1.35}
+.c-gr{background:var(--color-background-secondary);color:var(--color-text-secondary);border-color:var(--color-border-secondary)}
+.c-bl{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
+.c-te{background:#E1F5EE;color:#085041;border-color:#5DCAA5}
+.c-pu{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC}
+.c-co{background:#FAECE7;color:#712B13;border-color:#F0997B}
+.c-am{background:#FAEEDA;color:#633806;border-color:#EF9F27}
+@media(prefers-color-scheme:dark){
+  .c-bl{background:#0C447C;color:#B5D4F4;border-color:#185FA5}
+  .c-te{background:#085041;color:#9FE1CB;border-color:#0F6E56}
+  .c-pu{background:#26215C;color:#CECBF6;border-color:#534AB7}
+  .c-co{background:#4A1B0C;color:#F5C4B3;border-color:#993C1D}
+  .c-am{background:#412402;color:#FAC775;border-color:#854F0B}
+}
+.box{border:1px dashed var(--color-border-secondary);border-radius:12px;padding:8px 8px 6px;margin-bottom:0}
+.boxlbl{font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:5px;letter-spacing:.03em}
+.arr{text-align:center;color:var(--color-text-tertiary);font-size:13px;margin:3px 0;line-height:1}
+.bidir{text-align:center;font-size:10px;color:var(--color-text-tertiary);margin:3px 0}
+.obsbar{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:7px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.obslbl{font-size:10px;font-weight:500;color:var(--color-text-secondary);flex-shrink:0;margin-right:2px}
+.obschip{font-size:10px;color:var(--color-text-secondary);background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:5px;padding:2px 7px}
+.layer{margin-bottom:0}
+.gap{margin-bottom:5px}
+</style>
+<div class="ct">
+
+  <div class="layer gap">
+    <div class="lbl">数据层</div>
+    <div class="row">
+      <div class="chip c-gr"><div class="ctitle">DB 文件 / SQLite</div><div class="csub">现有 Ontology 接入</div></div>
+      <div class="chip c-gr"><div class="ctitle">TMS / WMS / ERP</div><div class="csub">REST API / JDBC</div></div>
+      <div class="chip c-gr"><div class="ctitle">各部门异构数据源</div><div class="csub">多源，物理分散</div></div>
+    </div>
+  </div>
+
+  <div class="arr">↓</div>
+
+  <div class="layer gap">
+    <div class="lbl">监控与检测层</div>
+    <div class="row">
+      <div class="chip c-bl"><div class="ctitle">调度器</div><div class="csub">APScheduler / Cron</div></div>
+      <div class="chip c-bl"><div class="ctitle">Ontology→SQL 引擎</div><div class="csub">现有 Agent 封装为内部服务</div></div>
+      <div class="chip c-bl"><div class="ctitle">异常规则引擎</div><div class="csub">YAML 配置，规则判断</div></div>
+      <div class="chip c-bl"><div class="ctitle">事件发布器</div><div class="csub">生成结构化 Event，含快照</div></div>
+    </div>
+  </div>
+
+  <div class="arr">↓</div>
+
+  <div class="layer gap">
+    <div class="lbl">事件总线</div>
+    <div class="row">
+      <div class="chip c-te" style="flex:3"><div class="ctitle">Redis Streams（Demo）→ Kafka（生产）</div><div class="csub">Consumer Groups · 持久化 · 顺序保证 · 背压控制</div></div>
+      <div class="chip c-te" style="flex:1"><div class="ctitle">Dead Letter Queue</div><div class="csub">失败事件隔离重试</div></div>
+    </div>
+  </div>
+
+  <div class="arr">↓</div>
+
+  <div class="layer gap">
+    <div class="lbl">Control Tower 核心</div>
+    <div class="box">
+      <div class="row">
+        <div class="chip c-pu"><div class="ctitle">Policy Engine</div><div class="csub">异常→Agent 路由 YAML</div></div>
+        <div class="chip c-pu"><div class="ctitle">Agent Registry</div><div class="csub">Agent Card · 心跳 · ACL</div></div>
+        <div class="chip c-pu"><div class="ctitle">Task Orchestrator</div><div class="csub">SAGA 状态机 · 重试 · 超时</div></div>
+        <div class="chip c-pu"><div class="ctitle">Data Broker</div><div class="csub">查询代理 · 权限过滤</div></div>
+        <div class="chip c-pu"><div class="ctitle">Escalation Manager</div><div class="csub">置信度 · 风险 · 人工审批</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bidir">↕ &nbsp;双向通信（REST + Webhook）&nbsp; ↕</div>
+
+  <div class="layer gap">
+    <div class="lbl">通信协议层（自定义 · 参考 A2A 设计）</div>
+    <div class="row">
+      <div class="chip c-te"><div class="ctitle">CT → Agent</div><div class="csub">Task Dispatch（Webhook push）</div></div>
+      <div class="chip c-te"><div class="ctitle">Agent → CT</div><div class="csub">result · query · escalate</div></div>
+      <div class="chip c-te"><div class="ctitle">Auth</div><div class="csub">JWT + Scope · 注册时颁发</div></div>
+      <div class="chip c-te"><div class="ctitle">Agent Card</div><div class="csub">能力声明 · 数据权限声明</div></div>
+    </div>
+  </div>
+
+  <div class="bidir">↕</div>
+
+  <div class="layer">
+    <div class="lbl">业务 Agent 生态 + 人工介入</div>
+    <div class="row">
+      <div class="chip c-co"><div class="ctitle">运输 Agent</div><div class="csub">各部门自研</div></div>
+      <div class="chip c-co"><div class="ctitle">仓储 Agent</div><div class="csub">各部门自研</div></div>
+      <div class="chip c-co"><div class="ctitle">采购 Agent</div><div class="csub">各部门自研</div></div>
+      <div class="chip c-co"><div class="ctitle">…</div><div class="csub">可插拔扩展</div></div>
+      <div class="chip c-am"><div class="ctitle">人工介入</div><div class="csub">审批 UI / Slack Bot</div></div>
+    </div>
+  </div>
+
+  <div class="obsbar">
+    <span class="obslbl">可观测性（横跨全链路）</span>
+    <span class="obschip">Event Store 不可变审计日志</span>
+    <span class="obschip">OpenTelemetry Trace（Trace ID 全程透传）</span>
+    <span class="obschip">结构化 JSON 日志</span>
+    <span class="obschip">Dashboard（Grafana / 自研）</span>
+  </div>
+
+</div>

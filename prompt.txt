@@ -1,0 +1,19 @@
+背景见 @background.txt , 参考文档见 @claude-report.md 和 @control_tower_architecture.html .
+现在调用 /ppt-master 来画一页极简风格的PPT来展示我们的架构. 不需要开始和结束页.
+
+# 底层: 基础设施
+包括数据库，计算环境，缓存和对象存储，配置中心，消息中间件，可观测性（opentelemetry trace，结构化日志，dashboard等）
+
+# 监控与检测层
+定时触发的调度器，以及与其配套的、可配置的异常规则(包括要查询的数据以及计算指标的方法、异常名称、分类、优先级等)，并将结构化的事件发布到事件总线层（event bus）
+
+# 事件总线层
+一个消息队列（如：基于RabbitMQ），支持死信队列（DLQ）隔离重试，由核心层处理
+
+# 核心层
+包含policy engine（异常的处理策略，路由路径）, Agent Registry（健康检查、能力/版本/权限管理）, Task Orchestrator(任务状态机、步骤编排、saga回滚机制), Data Broker（业务Agent的查询代理，按ACL过滤，）, Escalation Manager（升级人工的策略管理、推送与审批流程）
+
+它与业务Agent双向通信。参考A2A的自定义协议，包括CT向Agent下发任务（webhook push）、Agent向CT回传结果或query、鉴权（JWT Auth）、Agent Card（能力、权限声明等）。
+
+# 业务生态层
+包含各个部门自研的Agent，可插拔扩展，可直接找到对应的业务人员
