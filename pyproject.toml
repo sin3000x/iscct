@@ -1,0 +1,20 @@
+[project]
+name = "iscct"
+version = "0.1.0"
+description = "Control Tower demo framework"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn>=0.30",
+]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/iscct"]
+
+[tool.uv]
+package = true
