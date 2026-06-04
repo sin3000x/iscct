@@ -28,7 +28,7 @@
 建议模块：
 
 ```text
-ct_sdk/
+iscct/
   domain/                 # 领域模型：Event、Task、Agent、Policy、Approval、Progress
   ports/                  # 接口定义：EventBus、TaskStore、AgentGateway、HumanChannel、DataBroker
   application/            # 用例：接收异常、生成任务、分派任务、处理回调、升级人工
@@ -40,7 +40,7 @@ ct_sdk/
     agents/               # HTTP Webhook AgentGateway
   observability/          # trace、日志、事件审计
 examples/
-  logistics_demo/         # 仅作为样例，不允许污染 ct_sdk 核心
+  logistics_demo/         # 仅作为样例，不允许污染 iscct 核心
 ```
 
 如果现有仓库结构不同，可以按同样边界命名，但必须保持“核心领域无框架依赖”。
