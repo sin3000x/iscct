@@ -4,9 +4,9 @@ from .mock_data import APP_TITLE, MOCK_AGENTS, MOCK_EVENTS, MOCK_PROGRESS, MOCK_
 
 
 def _task_badge_class(status: str) -> str:
-    if status == "IN_PROGRESS":
+    if status == "进行中":
         return "bd-r"
-    if status == "AWAITING_HUMAN":
+    if status == "等待人工":
         return "bd-e"
     return "bd-k"
 
@@ -44,7 +44,7 @@ def render_home_page() -> str:
               <div class="agent-name">{agent['display_name']}</div>
               <div class="agent-meta">{agent['agent_id']}</div>
             </div>
-            <span class="agent-state {'ok' if agent['status'] == 'Healthy' else 'warm'}">{agent['status']}</span>
+            <span class="agent-state {'ok' if agent['status'] == '健康' else 'warm'}">{agent['status']}</span>
           </div>
           <div class="agent-cap">{agent['capability']}</div>
         </div>
@@ -77,8 +77,6 @@ def render_home_page() -> str:
   <div id="cta">
     <div id="hdr">
       <span class="htit">Control Tower</span>
-      <span class="hsep"></span>
-      <span class="hsub">前台总览 + CT 助手</span>
       <span class="hsp"></span>
       <span class="ldot"></span>
       <span class="sp sp-cr">3 严重</span>
@@ -90,9 +88,8 @@ def render_home_page() -> str:
     <div class="main">
       <aside class="pane side">
         <div class="side-top">
-          <div class="side-kicker">CT 助手</div>
-          <div class="side-title">Cursor-like Agent View</div>
-          <div class="side-sub">直接问当前状态、要任务进展、看审批建议。这里先用 mock 对话模拟人与 CT 的交互。</div>
+          <div class="side-title">CT Agent</div>
+          <div class="side-sub">直接问当前状态、要任务进展、看审批建议。这里先用模拟对话演示人与 CT 的交互。</div>
         </div>
         <div class="chat">
           <div class="chat-stream" id="cmsgs">
@@ -129,7 +126,7 @@ def render_home_page() -> str:
         </section>
 
         <section>
-          <div class="section">在线 Agent <span>mock data</span></div>
+          <div class="section">在线 Agent <span>模拟数据</span></div>
           <div class="agents">{agents_html}</div>
         </section>
 

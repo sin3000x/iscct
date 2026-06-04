@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Control Tower Demo UI</title>
+  <title>控制塔演示界面</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{width:100%;height:100%}
@@ -127,7 +127,7 @@
       <div class="hico">
         <svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5L14 4.8V11.2L8 14.5L2 11.2V4.8Z" stroke="#fff" stroke-width="1.2"/><circle cx="8" cy="8" r="2" fill="#fff"/></svg>
       </div>
-      <span class="htit">Control Tower</span>
+      <span class="htit">控制塔</span>
       <span class="hsep"></span>
       <span class="hsub">末端履约监控</span>
       <span class="hsp"></span>
@@ -162,25 +162,25 @@
         </div>
       </div>
 
-      <div class="sh">活跃任务 <span class="shn">点击展开 SAGA 执行步骤</span></div>
+      <div class="sh">活跃任务 <span class="shn">点击展开 事务执行步骤</span></div>
 
       <div class="tr" id="r-2401" onclick="tog('2401')">
         <div class="trh">
           <span class="tri">T-2401</span>
           <span class="trt">应发未发 · 沪A-12345 等 3 辆 · 松江发货站</span>
-          <span class="tra">车辆调度 Agent</span>
+          <span class="tra">车辆调度 智能体</span>
           <span class="trtm" id="tm-2401">—</span>
           <span class="bdg bd-r">执行中</span>
           <span class="chev">▾</span>
         </div>
         <div class="td">
           <div class="steps">
-            <div class="step"><div class="si si-d">✓</div><div class="sbody"><div class="sname">接收任务并解析</div><div class="smeta">车辆调度 Agent · 09:30</div><div class="snote">识别 3 辆未发车辆，计划 09:00 出发，已延误超 40 分钟</div></div></div>
+            <div class="step"><div class="si si-d">✓</div><div class="sbody"><div class="sname">接收任务并解析</div><div class="smeta">车辆调度 智能体 · 09:30</div><div class="snote">识别 3 辆未发车辆，计划 09:00 出发，已延误超 40 分钟</div></div></div>
             <div class="step"><div class="si si-d">✓</div><div class="sbody"><div class="sname">查询车辆与司机状态</div><div class="smeta">车辆调度 Agent · 09:32</div><div class="snote">沪A-12345 司机离线；沪B-67890、沪C-11111 货物装载完毕，司机就绪</div></div></div>
             <div class="step"><div class="si si-d">✓</div><div class="sbody"><div class="sname">联系原司机</div><div class="smeta">车辆调度 Agent · 09:34</div><div class="snote">致电 2 次未接通，短信提醒已发送，等待 5 分钟无响应后启动备用流程</div></div></div>
             <div class="step"><div class="si si-a"><span class="spin">↻</span></div><div class="sbody"><div class="sname">匹配备用司机</div><div class="smeta">车辆调度 Agent · 09:39 · 进行中</div><div class="snote">正在从备用司机池匹配距松江发货站最近的可用司机…</div></div></div>
             <div class="step"><div class="si si-p">○</div><div class="sbody"><div class="sname">通知仓库调整装货时间窗</div><div class="smeta">仓储 Agent · 待上一步完成后触发</div></div></div>
-            <div class="step"><div class="si si-p">○</div><div class="sbody"><div class="sname">更新客户 ETA 并发送通知</div><div class="smeta">客服 Agent · 待执行</div></div></div>
+            <div class="step"><div class="si si-p">○</div><div class="sbody"><div class="sname">更新客户 预计到达时间 并发送通知</div><div class="smeta">客服 Agent · 待执行</div></div></div>
           </div>
         </div>
       </div>
@@ -200,7 +200,7 @@
             <div class="esc-b">
               路由优化 Agent 建议变更 <strong>沪D-22222</strong> 的配送路线：<br>
               当前路线经莘庄立交（K123 匝道封闭，预计拥堵 35 分钟）<br>
-              建议路线：提前驶离主线 → 沪闵路辅路 → 莘松公路（+3.2km，节省约 20 分钟，ETA 由 10:15 提前至 09:55）<br>
+              建议路线：提前驶离主线 → 沪闵路辅路 → 莘松公路（+3.2km，节省约 20 分钟，预计到达时间 由 10:15 提前至 09:55）<br>
               <span class="wtxt">⚠ 此操作将向车载终端推送新路线，为不可逆操作</span>
             </div>
             <div class="esc-r" id="esc-r">
@@ -308,7 +308,7 @@
       document.getElementById('esc-r').innerHTML='<span style="font-size:11px;color:#534AB7;font-weight:500">已转交运营主管人工复核，预计 10 分钟内响应</span>'
     }
 
-    const SYS=`你是供应链 Control Tower 的 AI 助手，负责末端履约异常监控。当前时间约 09:42。
+    const SYS=`你是供应链 控制塔 的 AI 助手，负责末端履约异常监控。当前时间约 09:42。
 
 当前异常：
 - 应发未发（严重）：松江发货站 3 辆（沪A-12345 司机失联、沪B-67890 和沪C-11111 就绪），计划 09:00，延误超 40 分钟
