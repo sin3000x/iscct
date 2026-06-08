@@ -8,6 +8,11 @@ from uuid import uuid4
 
 
 class TaskStatus(str, Enum):
+    """任务生命周期状态。
+
+    这些状态用于描述任务从创建、分发到完成或回滚的完整生命周期。
+    """
+
     CREATED = "created"
     DISPATCHED = "dispatched"
     IN_PROGRESS = "in_progress"
@@ -21,6 +26,8 @@ class TaskStatus(str, Enum):
 
 
 class AssigneeType(str, Enum):
+    """任务可分配给的执行主体类型。"""
+
     AGENT = "agent"
     HUMAN = "human"
     CT_AGENT = "ct_agent"
@@ -29,6 +36,8 @@ class AssigneeType(str, Enum):
 
 @dataclass(frozen=True, slots=True)
 class TaskProgressEvent:
+    """描述一次任务进度上报。"""
+
     progress_id: str = field(default_factory=lambda: str(uuid4()))
     task_id: str = ""
     trace_id: str = ""
@@ -43,6 +52,8 @@ class TaskProgressEvent:
 
 @dataclass(frozen=True, slots=True)
 class Task:
+    """表示一个可调度、可追踪的任务对象。"""
+
     task_id: str = field(default_factory=lambda: str(uuid4()))
     parent_event_id: str = ""
     task_type: str = ""
@@ -64,6 +75,11 @@ class Task:
     progress_percent: int | None = None
 
     def elapsed_seconds(self, now: datetime | None = None) -> int:
+        """计算任务已持续的秒数。
+
+        如果任务尚未开始，则以创建时间作为起点；如果外部传入当前时间，
+        则使用该时间进行计算，便于测试和回放。
+        """
         baseline = self.started_at or self.created_at
         current = now or datetime.now(timezone.utc)
         return max(int((current - baseline).total_seconds()), 0)

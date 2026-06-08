@@ -37,6 +37,10 @@ PAGE_TEMPLATE = Template(
 
 
 def render_home_page() -> str:
+    """渲染首页 HTML。
+
+    :return: 包含前端启动所需静态模板与 mock 数据的 HTML 字符串。
+    """
     return PAGE_TEMPLATE.substitute(
         APP_TITLE=APP_TITLE,
         APP_TITLE_LITERAL=repr(APP_TITLE),
