@@ -16,8 +16,8 @@ class InMemoryEventBus(EventBus):
     立即同步调用同主题的订阅处理器，方便单元测试和本地调试。
     """
 
-    published: list[QueueMessage] = field(default_factory=list)
-    subscriptions: dict[str, list[QueueHandler]] = field(default_factory=dict)
+    published: list[QueueMessage] = field(default_factory=list)  # 已发布消息列表。
+    subscriptions: dict[str, list[QueueHandler]] = field(default_factory=dict)  # 主题到订阅处理器的映射。
 
     def publish(self, topic: str, message: dict[str, Any], headers: dict[str, str] | None = None) -> str:
         """发布消息并同步触发已订阅处理器。
@@ -71,7 +71,7 @@ class InMemoryEventBus(EventBus):
 class InMemoryAgentRegistry(AgentRegistry):
     """使用字典保存智能体注册信息的内存实现。"""
 
-    agents: dict[str, AgentCard] = field(default_factory=dict)
+    agents: dict[str, AgentCard] = field(default_factory=dict)  # 智能体 ID 到智能体卡片的映射。
 
     def register(self, agent: AgentCard) -> AgentCard:
         """写入或覆盖指定智能体。
@@ -117,10 +117,10 @@ class AgentRegistrationService:
 class InMemoryAgentRuntime(AgentRuntime):
     """记录运行时交互痕迹的内存实现。"""
 
-    accepted_tasks: list[dict[str, Any]] = field(default_factory=list)
-    progress_events: list[dict[str, Any]] = field(default_factory=list)
-    results: list[dict[str, Any]] = field(default_factory=list)
-    heartbeats: int = 0
+    accepted_tasks: list[dict[str, Any]] = field(default_factory=list)  # 已接收任务列表。
+    progress_events: list[dict[str, Any]] = field(default_factory=list)  # 已记录的进度事件列表。
+    results: list[dict[str, Any]] = field(default_factory=list)  # 已提交结果列表。
+    heartbeats: int = 0  # 心跳计数。
 
     def accept_task(self, task: dict[str, Any]) -> str:
         """接收任务并返回任务 ID。
